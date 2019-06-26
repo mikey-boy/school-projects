@@ -1,0 +1,20 @@
+#------------------------------------- Overview -------------------------------------#
+
+Implementation of padding oracle attack (otherwise know as Vaudenay attack) on a 
+vulnerable server. More details about the attack can be found in the paper availabe at 
+https://www.iacr.org/archive/eurocrypt2002/23320530/cbc02_e02d.pdf. 
+
+#---------------------------------- Webserver Specs ---------------------------------#
+
+The key difference is the padding in the paper is of the format {1 or 333 or 7777777},
+whereas the padding of the vulneable server this attacks is of the format 
+{1 or 123 or 1234567}. This padding is known as IS ESP padding.
+
+The value of the cookie is encrypted with AES.
+
+#-------------------------------------- Usage --------------------------------------#
+
+! Be sure to change setup values inside python files !
+
+python decrypt.py [cookie_value]
+

@@ -1,0 +1,55 @@
+#------------------------------------- Overview -------------------------------------#
+
+A simple "go back n" protocal to ensure a reliable data transfer over an unreliable
+transfer medium (in this case UDP). It works by send packets from send to reciever 
+through a provided emulater that will drop certain packet and add delays to other.
+It is solely used to send text-based files 
+
+#----------------------------------- Compilation ------------------------------------#
+
+Python files were compiled using Python 2.7.12
+
+#------------------------------------- Testing --------------------------------------#
+
+Testing was done on the following servers respectively
+
+emulator: ubuntu1604-002
+sender:   ubuntu1604-004
+receiver: ubuntu1604-006
+
+#----------------------------------- Parameters -------------------------------------#
+
+# Parameters showed in order of appearance
+
+Sender program:
+
+<host address of the network emulator>
+<UDP port number used by the emulator to receive data from the sender>
+<UDP port number used by the sender to receive ACKs from the emulator>
+<name of the file to be transferred>
+
+Receiver program:
+
+<hostname for the network emulator>
+<UDP port number used by the link emulator to receive ACKs from the receiver>
+<UDP port number used by the receiver  to  receive  data  from  the  emulator>
+<name  of  the  file  into  which  the received data is written>
+
+Emulator:
+
+<emulator's receiving UDP port number in the forward (sender) direction>
+<receiver’s network address>
+<receiver’s receiving UDP port number>
+<emulator's receiving UDP port number in the backward (receiver) direction>
+<sender’s network address>
+<sender’s receiving UDP port number>
+<maximum delay of the link in units of millisecond>
+<packet discard probability>
+<verbose-mode>
+
+#----------------------------------- Example Usage -----------------------------------#
+
+1.On the host host1: ./nEmulator 9991   host2 9994 9993 host3 9992 1 0.2 0
+2.On the host host2: python receiver.py host1 9993 9994 <output File>
+3.On the host host3: python sender.py   host1 9991 9992 <input file>
+

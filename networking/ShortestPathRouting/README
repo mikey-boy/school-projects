@@ -1,0 +1,44 @@
+#------------------------------------- Overview -------------------------------------#
+
+Implementation of a shortest path routing algorithm used between virual routers on
+a virtual network. Routers contact central authority for its neighbours (nse) and 
+associated cost to send packet to that neighbour.  It introduces itself to its 
+neighbours using HELLO packets. Once neighbours know of eachother, they will send over
+their respective neighbours using LSPDU packets. The shortest path algorithm will run
+on the corresponding network topology discovered (only considers routers within 2 hops
+of source router).
+
+#----------------------------------- Compilation ------------------------------------#
+
+Python files were compiled using Python 2.7.12
+
+#------------------------------------- Testing --------------------------------------#
+
+Testing was done on the following servers respectively
+
+emulator: ubuntu1604-006
+router:   ubuntu1604-004
+
+#----------------------------------- Parameters -------------------------------------#
+
+Router program:
+<router id>
+<host address of network emulator>
+<port of the network emulator>
+<open port on router>
+
+Emulator program:
+<host address that routers are on>
+<open port on emulator>
+
+#----------------------------------- Example Usage -----------------------------------#
+
+On host hostX:
+        ./nse-linux386 hostY 9999
+
+On host hostY:
+        python router 1 hostX 9999 9991
+        python router 2 hostX 9999 9992 
+        python router 3 hostX 9999 9993 
+        python router 4 hostX 9999 9994 
+        python router 5 hostX 9999 9995
